@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vivia 风格个人博客</title>
+  <style>
+    /* Reset */
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --accent:#6c5ce7;
+      --glass: rgba(255,255,255,0.6);
+      --shadow: 0 6px 18px rgba(16,24,40,0.08);
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial;
+    }
+    body{background:linear-gradient(180deg,#f6f7fb 0%, #f3f4f8 100%);color:#111827;min-height:100vh}
+
+    /* Layout */
+    .container{max-width:1100px;margin:36px auto;padding:24px;display:grid;grid-template-columns:320px 1fr;gap:28px}
+
+    /* Sidebar */
+    .sidebar{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);position:sticky;top:24px;height:fit-content}
+    .profile{display:flex;gap:16px;align-items:center}
+    .avatar{width:72px;height:72px;border-radius:16px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,var(--accent),#00bcd4)}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+    .name{font-weight:700;font-size:1.05rem}
+    .bio{font-size:0.9rem;color:var(--muted);margin-top:6px}
+
+    .subscribe{margin-top:18px}
+    .subscribe input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #e6e9f2}
+    .subscribe button{margin-top:8px;width:100%;padding:10px;border-radius:10px;border:0;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+
+    .widget{margin-top:18px}
+    .widget h4{font-size:0.95rem;margin-bottom:10px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{background:var(--bg);padding:6px 10px;border-radius:999px;font-size:0.85rem;color:var(--muted)}
+
+    /* Main */
+    .main-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#00bcd4);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+    .brand h1{font-size:1.25rem}
+    .search{width:300px;display:flex;gap:8px}
+    .search input{flex:1;padding:8px 10px;border-radius:10px;border:1px solid #e6e9f2}
+
+    .posts{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .post{display:flex;flex-direction:column;gap:12px;background:var(--card);border-radius:16px;padding:16px;box-shadow:var(--shadow);color:inherit;text-decoration:none;cursor:pointer;transition: transform 0.15s}
+    .post:hover{transform:translateY(-4px)}
+    .post .cover{height:140px;border-radius:12px;overflow:hidden;background:#eef2ff}
+    .post h3{font-size:1.05rem}
+    .meta{display:flex;gap:10px;align-items:center;color:var(--muted);font-size:0.9rem}
+    .excerpt{color:var(--muted);font-size:0.95rem}
+    .post .tags{margin-top:auto}
+
+    /* Featured */
+    .featured{display:grid;grid-template-columns:1fr 320px;gap:18px;margin-bottom:22px}
+    .hero{background:linear-gradient(180deg,rgba(108,92,231,0.1),rgba(0,188,212,0.04));padding:22px;border-radius:16px}
+    .hero h2{font-size:1.45rem;margin-bottom:8px}
+    .hero p{color:var(--muted)}
+
+    /* Footer */
+    footer{max-width:1100px;margin:36px auto;padding:18px;text-align:center;color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width:980px){.container{grid-template-columns:1fr;padding:18px}.posts{grid-template-columns:1fr}.featured{grid-template-columns:1fr}.search{width:100%}}
+
+    /* small UI niceties */
+    .pill{padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#f3eefc,#eaf8ff);font-weight:600}
+    a{color:inherit;text-decoration:none}
+  </style>
+</head>
+<body>
+<!-- 全屏首屏：带背景图 -->
+<header class="hero hero-bg" id="top">
+  <div class="hero-inner">
+    <div class="site-title">效听的精神家园</div>
+    <div class="site-sub">My Blog</div>
+    <div class="hero-actions">
+ 
+      <a class="btn" href="https://github.com/toby215" target="_blank">Follow my GitHub</a>
+    </div>
+  </div>
+</header>
+
+<style>
+/* 首屏背景图 Hero */
+.hero-bg {
+  height: 100vh; /* 整屏高度 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  background: url("images/bg.jpg") no-repeat center center/cover; /* 换成你自己的图片路径 */
+  position: relative;
+}
+
+/* 加一个遮罩层，文字更清晰 */
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45); /* 半透明黑色遮罩 */
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding: 20px;
+}
+
+.site-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.site-sub {
+  font-size: 1.5rem;
+  margin-bottom: 1.5em;
+}
+
+.hero-actions .btn {
+  display: inline-block;
+  margin: 0 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.hero-actions .btn:hover {
+  background: rgba(255,255,255,0.45);
+}
+</style>
+
+  <main>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="profile">
+          <div class="avatar"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="头像"></div>
+          <div>
+            <div class="name">杨效听</div>
+            <div class="bio"></div>
+          </div>
+        </div>
+
+        <div class="widget">
+          <h4>版权说明：</h4>
+          <p class="bio">本博客所有文章除特别声明外，均采用 CC BY-NC-SA 4.0 许可协议。转载请注明来自 效听的精神家园！</p>
+        </div>
+        <div class="wight">
+          <h4>重要更新说明：</h4>
+          <p class="bio">持续更新维护中！</p>
+          
+      <h2>
+        <a class="btn" href="https://github.com/toby215" target="_blank">Follow my GitHub</a>
+    
+      <h2>
+        <div>
+      </div>
+      </aside>
+
+      <section>
+        <div class="main-header">
+          <div class="brand">
+            <div class="logo">V</div>
+            <h1>Vivia 风格博客</h1>
+          </div>
+          <div class="search">
+            <input placeholder="搜索文章、标签或关键字..." />
+          </div>
+        </div>
+
+        <div class="featured">
+          <div class="hero">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+              <div>
+                <h2>欢迎来到我的博客</h2>
+                <p>记录旅行见闻、技术笔记与生活点滴!</p>
+                <div style="margin-top:12px"><span class="pill">最新：博客搭建大成功！</span></div>
+              </div>
+              <div style="width:220px;height:120px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:var(--shadow)"></div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <a class="post" href="article_about_me.html">
+              <h3>博客搭建大成功！</h3>
+              <div class="meta">Sep 3, 2025 · 阅读 8 分钟</div>
+              <p class="excerpt"></p>
+            </a>
+
+            <a class="post" href="article_html_blog.html">
+              <h3>如何用 HTML/CSS 快速搭建博客</h3>
+              <div class="meta">Aug 27, 2025 · 阅读 6 分钟</div>
+              <p class="excerpt">从零开始搭建一个响应式的单页博客，包含侧边栏与文章卡片布局。</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="posts">
+          <a class="post" href="article_maui_trip.html">
+            <div class="cover" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder');background-size:cover;background-position:center"></div>
+            <h3>博客搭建大成功！</h3>
+            <div class="meta">2025-9-6</div>
+            <p class="excerpt"></p>
+          </a>
+        </div>
+
+      </section>
+    </div>
+
+    <footer>
+      © 2025 杨效听 · 转载请注明来自 效听的精神家园！
+    </footer>
+  </main>
+
+  <script>
+    // 简单的搜索过滤（前端示例）
+    const input = document.querySelector('.search input');
+    input && input.addEventListener('input', (e)=>{
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.posts .post').forEach(post=>{
+        const text = (post.innerText || '').toLowerCase();
+        post.style.display = q && !text.includes(q) ? 'none' : '';
+      })
+    });
+  </script>
+</body>
+</html>
